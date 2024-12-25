@@ -1,0 +1,64 @@
+<!DOCTYPE HTML>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Fetch Veri</title>
+</head>
+<body>
+  <h1>Veri Listesi</h1>
+  <button id="fetchButton">Verileri Çek</button>
+  <button onclick="goster()">GÖNDER</button>
+  <ul id="dataList"></ul>
+    
+  <script>
+    // Fetch işlemini başlatan fonksiyon
+    async function fetchData() {
+      try {
+        const response = await fetch('http://127.0.0.1:5000/api');
+        
+        if (!response.ok) {
+          throw new Error('Network response was not OK');
+        }
+
+        const data = await response.json(); // JSON formatına dönüştür
+        displayData(data); // Veriyi göster
+      } catch (error) {
+        console.error('Hata:', error); // Hataları konsola yaz
+      }
+    }
+
+    // Gelen veriyi HTML'de liste olarak gösteren fonksiyon
+    function displayData(data) {
+      const dataList = document.getElementById('dataList');
+      dataList.innerHTML = ''; // Mevcut içeriği temizle
+
+      data.forEach(item => {
+        // Yeni bir liste elemanı oluştur
+        const listItem = document.createElement('li');
+        listItem.innerHTML = `
+          <strong>Soru:</strong> <br>
+          <strong>Şıklar:</strong>
+          <ul>
+            <li><button type="button" onclick="dogrula('${item.cevapA}','${item.dogruCevap}')">A: ${item.cevapA}</button></li>
+            <li><button type="button" onclick="dogrula('${item.cevapB}','${item.dogruCevap}')">B: ${item.cevapB}</button></li>
+            <li><button type="button" onclick="dogrula('${item.cevapC}','${item.dogruCevap}')">C: ${item.cevapC}</button></li>
+            <li><button type="button" onclick="dogrula('${item.cevapD}','${item.dogruCevap}')">D: ${item.cevapD}</button></li>
+          </ul> 
+         
+        `;
+
+        // Liste elemanını HTML'deki listeye ekle
+        dataList.appendChild(listItem);
+      });
+    }
+
+    // Butona tıklandığında veri çekme işlemini başlat
+    document.getElementById('fetchButton').addEventListener('click', fetchData);
+    </script>
+    <div><p>Geliştirici Muhammed Burak Kesen
+        
+    </p></div>
+  <script src="sunucu.js"></script>
+</body>
+</html>
