@@ -1,6 +1,5 @@
 import db
 from flask import Flask,jsonify 
-# from fastapi.middleware.cors import CORSMiddleware
 from flask_cors import CORS
 
 app=Flask(__name__)
