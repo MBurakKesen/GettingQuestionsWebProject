@@ -1,6 +1,6 @@
 import sqlite3 as sql
 
-db=sql.connect("C:/Users/Burak's Pc/Desktop/PythonProGörev/soruBankasi.db")
+db=sql.connect("soruBankasi.db")
 
 imlec=db.cursor()
 
@@ -30,5 +30,5 @@ db.commit()
 db.close()
 
 
-def veriGetir():
+def takeData():
     return dizi

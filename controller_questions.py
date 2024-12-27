@@ -1,13 +1,12 @@
-import db
+import db_repository
 from flask import Flask,jsonify 
 from flask_cors import CORS
 
 app=Flask(__name__)
 CORS(app)
 
-datamiz=db.veriGetir()
+
 def convert_data_to_json(questions):
-    # Her bir tuple'ı bir sözlüğe dönüştürerek JSON uyumlu hale getiriyoruz
     formatted_data = [
         {
             "soru": soru,
@@ -24,8 +23,8 @@ def convert_data_to_json(questions):
     
 @app.route("/api",methods=['GET'])
 def get_data():
-    datamiz=db.veriGetir()
-    jsonData=convert_data_to_json(datamiz)
+    data=db_repository.takeData()
+    jsonData=convert_data_to_json(data)
     return jsonify(jsonData)
 
 

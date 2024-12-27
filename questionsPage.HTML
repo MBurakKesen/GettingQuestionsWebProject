@@ -3,16 +3,16 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Fetch Veri</title>
+  <title>Soru Sayfası</title>
 </head>
 <body>
-  <h1>Veri Listesi</h1>
-  <button id="fetchButton">Verileri Çek</button>
+  <h1>Soru Listesi</h1>
+  <button id="fetchButton">Soruları Getir</button>
   <button onclick="goster()">GÖNDER</button>
   <ul id="dataList"></ul>
     
   <script>
-    // Fetch işlemini başlatan fonksiyon
+    
     async function fetchData() {
       try {
         const response = await fetch('http://127.0.0.1:5000/api');
@@ -21,20 +21,19 @@
           throw new Error('Network response was not OK');
         }
 
-        const data = await response.json(); // JSON formatına dönüştür
-        displayData(data); // Veriyi göster
+        const data = await response.json(); 
+        displayData(data); 
       } catch (error) {
-        console.error('Hata:', error); // Hataları konsola yaz
+        console.error('Hata:', error);
       }
     }
 
-    // Gelen veriyi HTML'de liste olarak gösteren fonksiyon
+
     function displayData(data) {
       const dataList = document.getElementById('dataList');
-      dataList.innerHTML = ''; // Mevcut içeriği temizle
+      dataList.innerHTML = ''; 
 
       data.forEach(item => {
-        // Yeni bir liste elemanı oluştur
         const listItem = document.createElement('li');
         listItem.innerHTML = `
           <strong>Soru:</strong> <br>
@@ -48,12 +47,10 @@
          
         `;
 
-        // Liste elemanını HTML'deki listeye ekle
         dataList.appendChild(listItem);
       });
     }
 
-    // Butona tıklandığında veri çekme işlemini başlat
     document.getElementById('fetchButton').addEventListener('click', fetchData);
     </script>
     <div><p>Geliştirici Muhammed Burak Kesen
