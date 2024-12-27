@@ -8,11 +8,10 @@
 <body>
   <h1>Soru Listesi</h1>
   <button id="fetchButton">Soruları Getir</button>
-  <button onclick="goster()">GÖNDER</button>
+  <button onclick="show()">GÖNDER</button>
   <ul id="dataList"></ul>
     
   <script>
-    
     async function fetchData() {
       try {
         const response = await fetch('http://127.0.0.1:5000/api');
@@ -27,8 +26,6 @@
         console.error('Hata:', error);
       }
     }
-
-
     function displayData(data) {
       const dataList = document.getElementById('dataList');
       dataList.innerHTML = ''; 
@@ -36,7 +33,7 @@
       data.forEach(item => {
         const listItem = document.createElement('li');
         listItem.innerHTML = `
-          <strong>Soru:</strong> <br>
+          <strong>Soru:${item.soru}</strong> <br>
           <strong>Şıklar:</strong>
           <ul>
             <li><button type="button" onclick="dogrula('${item.cevapA}','${item.dogruCevap}')">A: ${item.cevapA}</button></li>
@@ -52,10 +49,8 @@
     }
 
     document.getElementById('fetchButton').addEventListener('click', fetchData);
-    </script>
-    <div><p>Geliştirici Muhammed Burak Kesen
-        
-    </p></div>
+  </script>
+    <div><p>Geliştirici Muhammed Burak Kesen</p></div>
   <script src="PuanDogrula.js"></script>
 </body>
 </html>

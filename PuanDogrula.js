@@ -13,6 +13,9 @@ function dogrula(cevap,dogruCevap){
       }
 }
 
-function goster(){
+function show(){
+  if(skor<0){
+    skor=0;
     alert("Puanınız: " + skor);
+  }
 }
