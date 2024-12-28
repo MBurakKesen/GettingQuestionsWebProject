@@ -18,7 +18,7 @@ def convert_data_to_json(questions):
     ]
     return formatted_data
   
-@app.route("/api",methods=['GET'])
+@app.route("/",methods=['GET'])
 def get_data():
     data=db_repository.takeData()
     jsonData=convert_data_to_json(data)
